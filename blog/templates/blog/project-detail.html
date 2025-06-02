@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{ project.title }}
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "blog/cv.css" %}" />
+    <link rel="stylesheet" href="{% static "blog/project-detail.css" %}" />
+{% endblock %}
+
+{% block content %}
+<div class="page-wrapper">
+<section class="cv-card project-detail-card" id="project-detail">
+    <h2>{{ project.title }}</h2>
+    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-detail-img">
+    <p class="project-author"><strong>Author:</strong> <span class="author-name">{{ project.author.full_name }}</span></p>
+    <div class="project-detail-desc">
+        <p>{{ project.description }}</p>
+        <ul class="project-tags">
+            {% for tag in project.tags.all %}
+                <li class="tag">{{ tag.caption }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% if saved_for_later %}
+        <form method="post" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="remove_project_id" value="{{ project.id }}">
+            <button type="submit" class="cv-btn" name="remove" value="1">Remove from Read Later</button>
+        </form>
+    {% else %}
+        <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="cv-btn">Read Later</button>
+        </form>
+    {% endif %}
+    {% if project.files.all %}
+        <a href="{% url 'download-project-files-zip' project.slug %}" class="cv-btn">Download my code as ZIP</a>
+    {% endif %}
+</div>
+{% endblock %}

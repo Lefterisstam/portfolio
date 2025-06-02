@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+All my Projects
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "blog/projects.css" %}" />
+    <link rel="stylesheet" href="{% static "blog/all-projects.css" %}" />
+{% endblock %}
+
+{% block content %}
+{% if all_projects %}
+<div class="all-projects-wrapper">
+<section id="all-projects">
+    <h2>My Projects</h2>
+    <ul>
+        {% for project in all_projects %}
+            {% include "blog/includes/project.html" %}
+        {% endfor %}
+    </ul>
+</section>
+</div>
+{% else %}
+<div class="empty-projects-wrapper">
+    <div class="empty-projects-card">
+        <h2>No Projects Added</h2>
+        <p>No projects have been added yet. Please check back later!</p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'blog/cv.css' %}">
+{% endblock %}
+{% block content %}
+<div class="page-wrapper">
+<div class="cv-card">
+    {% if cv %}
+        <h2>Download My CV</h2>
+        <p>
+            <a href="{{ cv.file.url }}" download="{{ filename }}" class="cv-btn">
+                Download CV ({{ filename }})
+            </a>
+        </p>
+    {% else %}
+        <h2>No CV Available</h2>
+        <p>The CV has not been uploaded yet. Please check back later!</p>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

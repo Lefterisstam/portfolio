@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+My Portfolio
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "blog/projects.css" %}" />
+    <link rel="stylesheet" href="{% static "blog/index.css" %}" />
+{% endblock %}
+
+{% block content %}
+<section id="welcome">
+    <header>
+        <img src="{% static "blog/images/evoia-6.jpg" %}" alt="Lefteris - The author of this site" />
+        <h2>LEFTERIS' BLOG</h2>
+    </header>
+    <p>Hi, I am Lefteris and this is my portfolio site!</p>
+</section> 
+
+<section id="latest-projects">
+    <h2>My Latest Projects</h2>
+    <ul>
+        {% for project in projects %}
+            {% include "blog/includes/project.html" %}
+        {% endfor %}
+    </ul>
+</section>
+
+<section id="about">
+    <h2>What I Do</h2>
+    <p>
+        Here you can write for example what you like to do!
+    </p>
+    <p>
+        Here you can write for example why you like programming!
+    </p>
+</section>
+{% endblock %}

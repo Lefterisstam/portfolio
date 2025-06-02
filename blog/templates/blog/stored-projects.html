@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'blog/projects.css' %}" />
+    <link rel="stylesheet" href="{% static 'blog/stored-projects.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="page-wrapper">
+<section id="stored-projects">
+    {% if has_projects %}
+    <h2>Stored Projects</h2>
+        <ul class="projects-list">
+            {% for project in projects %}
+                {% include "blog/includes/project.html" %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h2>No Stored Projects</h2>
+        <p>You haven't saved any projects for later.</p>
+    {% endif %}
+</section>
+</div>
+{% endblock %}
